@@ -3,16 +3,21 @@ Welcome to  Spring Boot classroom repository
 
 ![image](https://user-images.githubusercontent.com/29695491/119985600-c3849380-bfba-11eb-88e7-86894ab7012d.png)
 
-You will need to install:
+### How to run :runner:
 
-* [JDK 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
-* [GIT](https://git-scm.com/download/)
-* [Maven](https://maven.apache.org/download.cgi)
-* [IntelliJ](https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC)
-* [Cmder](https://cmder.net/)
-* [Notepad++](https://notepad-plus-plus.org/downloads/v7.8.8/)
+**1° step** - Start docker container with `postgres` and `sonarqube` :whale:
 
-Don't forget to handle / throw exceptions on the right way.
+```bash
+docker-compose -f docker-compose.yml up -d
+```
+
+**2° step** - Start item-storage-service :computer:
+
+```bash
+mvn clean install -DskipTests && mvnw spring-boot:run
+```
+
+### API :fire:
 
 Try the API with:
 

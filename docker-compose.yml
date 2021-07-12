@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  postgres:
+    image: postgres:9.6
+    container_name: "item-storage_postgres"
+    restart: always
+    networks:
+      - itemnet
+    environment:
+      - POSTGRES_DB=item-storage-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+
+  sonarqube:
+    image: library/sonarqube:9.0-community
+    container_name: "item-storage_sonar"
+    networks:
+      - itemnet
+    ports:
+      - "9000:9000"
+
+networks:
+  itemnet:
