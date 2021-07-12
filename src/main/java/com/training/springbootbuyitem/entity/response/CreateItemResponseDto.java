@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateItemResponseDto {
 
-	private Long itemUid;
+    private Long itemUid;
 
-	public Long getItemUid() {
-		return itemUid;
-	}
+    public Long getItemUid() {
+        return itemUid;
+    }
 
-	public void setItemUid(Long itemUid) {
-		this.itemUid = itemUid;
-	}
+    public void setItemUid(Long itemUid) {
+        this.itemUid = itemUid;
+    }
 }

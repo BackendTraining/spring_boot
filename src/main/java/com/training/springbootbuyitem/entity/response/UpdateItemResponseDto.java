@@ -13,11 +13,11 @@ import java.math.BigInteger;
 @AllArgsConstructor
 public class UpdateItemResponseDto extends CreateItemResponseDto {
 
-	private String name;
-	private String state;
-	private String description;
-	private String market;
-	private BigInteger stock;
-	private BigDecimal priceTag;
+    private String name;
+    private String state;
+    private String description;
+    private String market;
+    private BigInteger stock;
+    private BigDecimal priceTag;
 
 }

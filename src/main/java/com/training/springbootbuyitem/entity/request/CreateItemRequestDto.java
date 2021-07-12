@@ -15,15 +15,15 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 public class CreateItemRequestDto {
 
-	@NotEmpty
-	private String name;
-	private String description;
-	@NotEmpty
-	private String market;
-	@NotNull
-	@PositiveOrZero
-	private Integer stock;
-	@NotNull
-	@PositiveOrZero
-	private Double priceTag;
+    @NotEmpty
+    private String name;
+    private String description;
+    @NotEmpty
+    private String market;
+    @NotNull
+    @PositiveOrZero
+    private Integer stock;
+    @NotNull
+    @PositiveOrZero
+    private Double priceTag;
 }
