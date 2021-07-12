@@ -1,7 +1,6 @@
 server:
   servlet:
     context-path: /item-storage-service
-
 info:
   app:
     name: '@project.artifactId@'
