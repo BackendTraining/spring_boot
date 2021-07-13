@@ -13,8 +13,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class BuyItemApplication {
 
     public static void main(String[] args) {
-        ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
-
         SpringApplication.run(BuyItemApplication.class, args);
     }
 
