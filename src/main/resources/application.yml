@@ -1,6 +1,28 @@
 server:
   servlet:
     context-path: /item-storage-service
+  port: 8888
+
+spring:
+  datasource:
+    tomcat:
+      min-idle: 1
+      max-idle: 20
+      max-active: 20
+      test-while-idle: true
+      test-on-borrow: true
+      initial-size: 1
+      remove-abandoned: true
+      remove-abandoned-timeout: 1800
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/item-storage-db
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    root: INFO
+
 info:
   app:
     name: '@project.artifactId@'
@@ -11,3 +33,8 @@ info:
     name: '@project.name@'
     version: '@project.version@'
     encoding: '@project.build.sourceEncoding@'
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

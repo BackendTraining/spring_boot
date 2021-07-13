@@ -24,7 +24,6 @@ public class TestItemRepository {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Sql("/delete_all.sql")
 	@Test
 	public void createItemTest() {
 		Item item = new Item("my item");
@@ -41,7 +40,7 @@ public class TestItemRepository {
 		assertThat(itemRepository.findAll().size(), is(5));
 	}
 
-/*	@Sql("/delete_all.sql")
+/*
 	@Test(expected = DataIntegrityViolationException.class)
 	public void createDuplicateItemTest() {
 		itemRepository.save(Item.builder().name("my item").priceTag(BigDecimal.ONE).stock(BigInteger.ONE).build());
