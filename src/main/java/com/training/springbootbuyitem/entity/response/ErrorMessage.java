@@ -1,5 +1,8 @@
 package com.training.springbootbuyitem.entity.response;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ErrorMessage {
 
     private String traceId;

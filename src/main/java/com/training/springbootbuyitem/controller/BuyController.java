@@ -9,6 +9,7 @@ import com.training.springbootbuyitem.entity.response.GetItemResponseDto;
 import com.training.springbootbuyitem.entity.response.UpdateItemResponseDto;
 import com.training.springbootbuyitem.service.ItemService;
 import com.training.springbootbuyitem.utils.annotation.ServiceOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -28,6 +29,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RefreshScope
 @RestController
 public class BuyController implements IBuyController {
