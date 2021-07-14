@@ -71,7 +71,7 @@ public class ItemService implements IItemService {
         if (item.getPriceTag() != null && item.getPriceTag().longValue() >= 0.0) {
             persistedItem.setPriceTag(item.getPriceTag());
         }
-        return persistedItem;
+        return itemRepository.save(persistedItem);
     }
 
     @Override

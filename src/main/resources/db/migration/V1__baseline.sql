@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS itemStorage.item
     price_tag        decimal,
     state            varchar(50),
 
-    created_by       varchar(100)                                  NOT NULL,
+    created_by       varchar(100),
     modified_at      TIMESTAMP WITH TIME ZONE,
     created_at       TIMESTAMP WITH TIME ZONE default CURRENT_DATE NOT NULL,
     last_modified_by varchar(100),
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS itemStorage.user
     first_name       varchar(255),
     last_name        varchar(255),
 
-    created_by       varchar(100)                                  NOT NULL,
+    created_by       varchar(100),
     modified_at      TIMESTAMP WITH TIME ZONE,
     created_at       TIMESTAMP WITH TIME ZONE default CURRENT_DATE NOT NULL,
     last_modified_by varchar(100),
