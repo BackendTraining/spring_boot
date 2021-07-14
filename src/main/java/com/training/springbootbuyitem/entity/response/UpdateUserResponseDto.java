@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUserResponseDto extends CreateUserResponseDto {
+public class UpdateUserResponseDto extends CreateUserResponseDto {
 
     private String firstName;
     private String lastName;
