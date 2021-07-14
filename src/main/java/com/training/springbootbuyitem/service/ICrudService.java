@@ -2,7 +2,7 @@ package com.training.springbootbuyitem.service;
 
 import java.util.List;
 
-public interface ICrudService<T extends Object> {
+public interface ICrudService<T> {
 
 
     List<T> list();

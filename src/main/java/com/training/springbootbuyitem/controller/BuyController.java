@@ -11,7 +11,6 @@ import com.training.springbootbuyitem.service.ItemService;
 import com.training.springbootbuyitem.utils.annotation.ServiceOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -34,14 +32,13 @@ import java.util.stream.Collectors;
 @RestController
 public class BuyController implements IBuyController {
 
-    @Autowired
-    private ItemService itemService;
-    /**
-     * @JavaDoc ModelMapper is a mapping tool easily configurable to accommodate most application defined entities check
-     * some configuration example at: http://modelmapper.org/user-manual/
-     */
-    @Autowired
-    private ModelMapper mapper;
+    private final ItemService itemService;
+    private final ModelMapper mapper;
+
+    public BuyController(ItemService itemService, ModelMapper mapper) {
+        this.itemService = itemService;
+        this.mapper = mapper;
+    }
 
     @RequestMapping("/")
     public String home() {
@@ -98,7 +95,7 @@ public class BuyController implements IBuyController {
 
     @Override
     @ServiceOperation("blockItem")
-    @RequestMapping(value = "/{id}/block", method = RequestMethod.POST, produces = "application/json")
+    @PostMapping(value = "/{id}/block", produces = "application/json")
     public ResponseEntity<HttpStatus> blockItem(@PathVariable("id") Long id,
                                                 @RequestBody DispatchItemRequestDto request) {
         itemService.block(id, request.getQuantity());
@@ -108,7 +105,7 @@ public class BuyController implements IBuyController {
 
     @Override
     @ServiceOperation("blockItem")
-    @RequestMapping(value = "/{id}/{user}/block", method = RequestMethod.POST, produces = "application/json")
+    @PostMapping(value = "/{id}/{user}/block", produces = "application/json")
     public ResponseEntity<HttpStatus> blockItemForUser(@PathVariable("id") Long id, @PathVariable("user") Long userId,
                                                        @RequestBody DispatchItemRequestDto request) {
         itemService.block(id, request.getQuantity());
