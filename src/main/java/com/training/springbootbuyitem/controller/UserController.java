@@ -45,7 +45,7 @@ public class UserController implements IUserController {
 
     @Override
     @GetMapping("/all")
-    @ServiceOperation("getUser")
+    @ServiceOperation("getUsers")
     public ResponseEntity<List<GetUserResponseDto>> getUsers() {
         return new ResponseEntity<>(userService.list().stream().map(i -> mapper.map(i, GetUserResponseDto.class)).collect(
             Collectors.toList()), HttpStatus.OK);

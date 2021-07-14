@@ -29,7 +29,6 @@
         <flyway.version>6.5.7</flyway.version>
 
         <sonar.login>admin</sonar.login>
-        <sonar.password>12345</sonar.password>
         <sonar.sources>src/main/java</sonar.sources>
         <sonar.tests>src/test/java</sonar.tests>
     </properties>

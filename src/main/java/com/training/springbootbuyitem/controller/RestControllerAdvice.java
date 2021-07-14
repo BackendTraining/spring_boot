@@ -42,9 +42,7 @@ public class RestControllerAdvice {
     private ResponseEntity<ErrorMessage> buildErrorMessageResponseEntity(String msg, HttpStatus httpStatus) {
         log.error(msg);
 
-        MDC.put(OPERATION_HEADER, EnumOperation.CREATE_ITEM.name());
-
-        return new ResponseEntity<>(
+        ResponseEntity<ErrorMessage> errorMessageResponseEntity = new ResponseEntity<>(
             ErrorMessage.builder()
                 .message(msg)
                 .code(httpStatus.value())
@@ -52,6 +50,10 @@ public class RestControllerAdvice {
                 .operation(MDC.get(OPERATION_HEADER))
                 .build(),
             httpStatus);
+
+        MDC.remove(OPERATION_HEADER);
+
+        return errorMessageResponseEntity;
     }
 
 }
