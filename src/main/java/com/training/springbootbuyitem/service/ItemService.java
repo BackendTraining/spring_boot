@@ -5,11 +5,9 @@ import com.training.springbootbuyitem.enums.EnumEntity;
 import com.training.springbootbuyitem.enums.EnumItemState;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
 import com.training.springbootbuyitem.repository.ItemRepository;
-import com.training.springbootbuyitem.utils.properties.ItemStorageProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestTemplate;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,14 +19,8 @@ public class ItemService implements IItemService {
 
     private final ItemRepository itemRepository;
 
-    private final ItemStorageProperties itemStorageProperties;
-
-    private final RestTemplate restTemplate;
-
-    public ItemService(ItemRepository itemRepository, ItemStorageProperties itemStorageProperties, RestTemplate restTemplate) {
+    public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
-        this.itemStorageProperties = itemStorageProperties;
-        this.restTemplate = restTemplate;
     }
 
     @Override
