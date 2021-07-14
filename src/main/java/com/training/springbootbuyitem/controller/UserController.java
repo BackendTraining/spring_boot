@@ -7,7 +7,6 @@ import com.training.springbootbuyitem.entity.response.GetUserResponseDto;
 import com.training.springbootbuyitem.entity.response.UpdateUserResponseDto;
 import com.training.springbootbuyitem.service.UserService;
 import com.training.springbootbuyitem.utils.annotation.ServiceOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;

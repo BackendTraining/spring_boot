@@ -32,3 +32,13 @@ http://127.0.0.1:8888/all
 ```
 
 To get all the items available in the repository
+
+### Sonarqube
+
+To send the code statistics to sonarqube run the following command:
+
+> add sonar.password property in `pom.xml` file.
+
+```bash
+mvn install sonar:sonar
+```
