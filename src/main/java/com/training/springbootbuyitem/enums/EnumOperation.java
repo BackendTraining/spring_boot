@@ -1,5 +1,11 @@
 package com.training.springbootbuyitem.enums;
 
 public enum EnumOperation {
-    CreateItem, UpdateItem, GetItem, ListItem, DeleteItem, RestockItem, DispatchItem
+    CREATE_ITEM,
+    UPDATE_ITEM,
+    GET_ITEM,
+    LIST_ITEM,
+    DELETE_ITEM,
+    RESTOCK_ITEM,
+    DISPATCH_ITEM
 }

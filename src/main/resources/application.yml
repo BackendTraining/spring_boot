@@ -19,9 +19,6 @@ spring:
     username: postgres
     driver-class-name: org.postgresql.Driver
 
-logging:
-  level:
-    root: INFO
 
 info:
   app:
