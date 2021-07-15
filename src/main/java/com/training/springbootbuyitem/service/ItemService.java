@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -48,8 +49,17 @@ public class ItemService implements IItemService {
 
     // TODO - ex 10
     @Override
-    public List<Item> get(List<Long> id) {
-        return new ArrayList<>();
+    public List<Item> get(List<Long> ids) {
+        List<Item> itemList = new ArrayList<>();
+        ids.forEach(id -> {
+            Item item = itemRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException(EnumEntity.ITEM.name(), id));
+            if (item instanceof Item) {
+                itemList.add(item);
+            }
+        });
+
+        return itemList;
     }
 
     @Override
@@ -60,14 +70,14 @@ public class ItemService implements IItemService {
     @Override
     public Item update(Item item) {
         Item persistedItem = get(item.getItemUid());
-        if (!StringUtils.hasText(item.getName())) {
-            persistedItem.setName(item.getName());
+        if (StringUtils.hasText(item.getName())) {
+            persistedItem.setName(StringUtils.trimAllWhitespace(item.getName()));
         }
-        if (!StringUtils.isEmpty(item.getDescription())) {
-            persistedItem.setDescription(item.getDescription());
+        if (StringUtils.hasText(item.getDescription())) {
+            persistedItem.setDescription(StringUtils.trimAllWhitespace(item.getDescription()));
         }
-        if (!StringUtils.isEmpty(item.getMarket())) {
-            persistedItem.setMarket(item.getMarket());
+        if (StringUtils.hasText(item.getMarket())) {
+            persistedItem.setMarket(StringUtils.trimAllWhitespace(item.getMarket()));
         }
         if (item.getStock() != null && item.getStock().intValue() >= 0) {
             persistedItem.setStock(item.getStock());
@@ -75,7 +85,22 @@ public class ItemService implements IItemService {
         if (item.getPriceTag() != null && item.getPriceTag().longValue() >= 0.0) {
             persistedItem.setPriceTag(item.getPriceTag());
         }
-        return persistedItem;
+        return itemRepository.save(persistedItem);
+    }
+
+    @Override
+    public List<Item> updateList(List<Item> itemList) {
+        List<Item> updatedItemList = new ArrayList<>();
+        itemList.forEach(item -> {
+            updatedItemList.add(update(item));
+        });
+        return updatedItemList;
+
+    }
+
+    @Override
+    public List<Item> updateListById(List<Long> idList) {
+        return updateList(get(idList));
     }
 
     @Override
