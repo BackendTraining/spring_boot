@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RefreshScope
 @RestController
+@RequestMapping("/items")
 public class BuyController implements IBuyController {
 
     @Autowired
@@ -34,11 +35,6 @@ public class BuyController implements IBuyController {
      */
     @Autowired
     private ModelMapper mapper;
-
-    @RequestMapping("/")
-    public String home() {
-        return "This is what i was looking for";
-    }
 
     @Override
     @PostMapping
@@ -62,17 +58,13 @@ public class BuyController implements IBuyController {
         return new ResponseEntity<>(mapper.map(itemService.update(item), UpdateItemResponseDto.class), HttpStatus.OK);
     }
 
-    @PatchMapping("/updateItems")
-    @ServiceOperation("updateItemsById")
-    public ResponseEntity<UpdateItemResponseDto> updateItemsById(@RequestBody List<Long> idList) {
-        return new ResponseEntity<>(mapper.map(itemService.updateListById(idList), UpdateItemResponseDto.class), HttpStatus.OK);
-    }
-/*
+    @Override
     @PatchMapping("/updateItems")
     @ServiceOperation("updateItems")
-    public ResponseEntity<UpdateItemResponseDto> updateItems(@RequestBody List<Item> itemList) {
-        return new ResponseEntity<>(mapper.map(itemService.updateList(itemList), UpdateItemResponseDto.class), HttpStatus.OK);
-    }*/
+    public ResponseEntity<List<UpdateItemResponseDto>> updateItems(@RequestParam List<Long> idList, @RequestBody Item item) {
+        return new ResponseEntity<>(itemService.updateList(idList, item).stream().map(i -> mapper.map(i, UpdateItemResponseDto.class)).collect(
+            Collectors.toList()), HttpStatus.OK);
+    }
 
     @Override
     @DeleteMapping("/{id}")
@@ -90,7 +82,8 @@ public class BuyController implements IBuyController {
             Collectors.toList()), HttpStatus.OK);
     }
 
-    @GetMapping("/getItemById")
+    @Override
+    @GetMapping("/getItems")
     @ServiceOperation("getItems")
     public ResponseEntity<List<GetItemResponseDto>> getItems(@RequestParam List<Long> idList) {
         return new ResponseEntity<>(itemService.get(idList).stream().map(i -> mapper.map(i, GetItemResponseDto.class)).collect(
