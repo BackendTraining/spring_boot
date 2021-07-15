@@ -14,14 +14,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,6 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RefreshScope
 @RestController
+@RequestMapping("/items")
 public class BuyController implements IBuyController {
 
     private final ItemService itemService;
@@ -38,11 +33,6 @@ public class BuyController implements IBuyController {
     public BuyController(ItemService itemService, ModelMapper mapper) {
         this.itemService = itemService;
         this.mapper = mapper;
-    }
-
-    @RequestMapping("/")
-    public String home() {
-        return "This is what i was looking for";
     }
 
     @Override
@@ -68,6 +58,14 @@ public class BuyController implements IBuyController {
     }
 
     @Override
+    @PatchMapping("/updateItems")
+    @ServiceOperation("updateItems")
+    public ResponseEntity<List<UpdateItemResponseDto>> updateItems(@RequestParam List<Long> idList, @RequestBody Item item) {
+        return new ResponseEntity<>(itemService.updateList(idList, item).stream().map(i -> mapper.map(i, UpdateItemResponseDto.class)).collect(
+            Collectors.toList()), HttpStatus.OK);
+    }
+
+    @Override
     @DeleteMapping("/{id}")
     @ServiceOperation("deleteItem")
     public ResponseEntity<HttpStatus> deleteItem(@PathVariable("id") Long id) {
@@ -80,6 +78,14 @@ public class BuyController implements IBuyController {
     @ServiceOperation("listItems")
     public ResponseEntity<List<GetItemResponseDto>> listItems() {
         return new ResponseEntity<>(itemService.list().stream().map(i -> mapper.map(i, GetItemResponseDto.class)).collect(
+            Collectors.toList()), HttpStatus.OK);
+    }
+
+    @Override
+    @GetMapping("/getItems")
+    @ServiceOperation("getItems")
+    public ResponseEntity<List<GetItemResponseDto>> getItems(@RequestParam List<Long> idList) {
+        return new ResponseEntity<>(itemService.get(idList).stream().map(i -> mapper.map(i, GetItemResponseDto.class)).collect(
             Collectors.toList()), HttpStatus.OK);
     }
 

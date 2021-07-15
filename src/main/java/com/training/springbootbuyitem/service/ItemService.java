@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,16 @@ public class ItemService implements IItemService {
 
     // TODO - ex 10
     @Override
-    public List<Item> get(List<Long> id) {
-        return new ArrayList<>();
+    public List<Item> get(List<Long> ids) {
+        List<Item> itemList = new ArrayList<>();
+        ids.forEach(id -> {
+            Item item = itemRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException(EnumEntity.ITEM.name(), id));
+
+            itemList.add(item);
+        });
+
+        return itemList;
     }
 
     @Override
@@ -47,14 +56,16 @@ public class ItemService implements IItemService {
 
     @Override
     public Item update(Item item) {
-        Item persistedItem = get(item.getItemUid());
-        if (!StringUtils.hasText(item.getName())) {
+        Long id = item.getItemUid();
+        Item persistedItem = itemRepository.findById(id).orElseThrow(() ->
+            new EntityNotFoundException(EnumEntity.ITEM.name(), id));
+        if (StringUtils.hasText(item.getName())) {
             persistedItem.setName(item.getName());
         }
-        if (!StringUtils.isEmpty(item.getDescription())) {
+        if (StringUtils.hasText(item.getDescription())) {
             persistedItem.setDescription(item.getDescription());
         }
-        if (!StringUtils.isEmpty(item.getMarket())) {
+        if (StringUtils.hasText(item.getMarket())) {
             persistedItem.setMarket(item.getMarket());
         }
         if (item.getStock() != null && item.getStock().intValue() >= 0) {
@@ -64,6 +75,17 @@ public class ItemService implements IItemService {
             persistedItem.setPriceTag(item.getPriceTag());
         }
         return itemRepository.save(persistedItem);
+    }
+
+    @Override
+    @Transactional
+    public List<Item> updateList(List<Long> idList, Item newItemInfo) {
+        List<Item> updatedItemList = new ArrayList<>();
+        idList.forEach(item -> {
+            newItemInfo.setItemUid(item);
+            updatedItemList.add(update(newItemInfo));
+        });
+        return updatedItemList;
     }
 
     @Override
