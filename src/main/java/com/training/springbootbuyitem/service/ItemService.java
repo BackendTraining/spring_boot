@@ -30,8 +30,8 @@ public class ItemService implements IItemService {
 
     @Override
     public Item get(Long id) {
-        return itemRepository.findById(id).orElseThrow(() ->
-            new EntityNotFoundException(EnumEntity.ITEM.name(), id));
+        return itemRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(EnumEntity.ITEM.name(), id));
     }
 
     // TODO - ex 10
