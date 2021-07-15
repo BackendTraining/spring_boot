@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @RefreshScope
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController implements IUserController {
 
     private final UserService userService;
@@ -37,14 +37,14 @@ public class UserController implements IUserController {
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     @ServiceOperation("getUser")
     public ResponseEntity<GetUserResponseDto> getUser(@PathVariable("id") Long id) {
         return new ResponseEntity<>(mapper.map(userService.get(id), GetUserResponseDto.class), HttpStatus.OK);
     }
 
     @Override
-    @GetMapping("/all")
+    @GetMapping
     @ServiceOperation("getUsers")
     public ResponseEntity<List<GetUserResponseDto>> getUsers() {
         return new ResponseEntity<>(userService.list().stream().map(i -> mapper.map(i, GetUserResponseDto.class)).collect(
@@ -52,14 +52,14 @@ public class UserController implements IUserController {
     }
 
     @Override
-    @PostMapping
+    @PostMapping("/user")
     @ServiceOperation("createUser")
     public ResponseEntity<CreateUserResponseDto> createUser(@RequestBody @Valid CreateUserRequestDto request) {
         return new ResponseEntity<>(mapper.map(userService.save(mapper.map(request, User.class)), CreateUserResponseDto.class), HttpStatus.CREATED);
     }
 
     @Override
-    @PatchMapping("/{id}")
+    @PatchMapping("/user/{id}")
     @ServiceOperation("updateUser")
     public ResponseEntity<UpdateUserResponseDto> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         user.setUserUid(id);

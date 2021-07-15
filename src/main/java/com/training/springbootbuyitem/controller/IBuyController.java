@@ -21,19 +21,19 @@ public interface IBuyController {
     @ServiceOperation("createItem")
     ResponseEntity<CreateItemResponseDto> createItem(@RequestBody @Valid CreateItemRequestDto request);
 
-    @GetMapping("/{id}")
+    @GetMapping("/item/{id}")
     @ServiceOperation("getItem")
     ResponseEntity<GetItemResponseDto> getItem(@PathVariable("id") Long id);
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/item/{id}")
     @ServiceOperation("updateItem")
     ResponseEntity<UpdateItemResponseDto> updateItem(@PathVariable("id") Long id, @RequestBody Item item);
 
-    @PatchMapping("/updateItems")
+    @PatchMapping("/list/ids/update")
     @ServiceOperation("updateItems")
     ResponseEntity<List<UpdateItemResponseDto>> updateItems(@RequestParam List<Long> idList, @RequestBody Item item);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/item/{id}")
     @ServiceOperation("deleteItem")
     ResponseEntity<HttpStatus> deleteItem(@PathVariable("id") Long id);
 
@@ -41,26 +41,26 @@ public interface IBuyController {
     @ServiceOperation("listItems")
     ResponseEntity<List<GetItemResponseDto>> listItems();
 
-    @GetMapping("/getItems")
+    @GetMapping("/list/ids")
     @ServiceOperation("getItems")
     ResponseEntity<List<GetItemResponseDto>> getItems(@RequestParam List<Long> idList);
 
-    @PostMapping("/{id}/dispatch")
+    @PostMapping("/item/{id}/dispatch")
     @ServiceOperation("dispatchItem")
     ResponseEntity<HttpStatus> dispatchItem(@PathVariable("id") Long id,
                                             @RequestBody DispatchItemRequestDto request);
 
-    @PostMapping("/{id}/blockItem")
+    @PostMapping("/item/{id}/block")
     @ServiceOperation("blockItem")
     ResponseEntity<HttpStatus> blockItem(@PathVariable("id") Long id,
                                          @RequestBody DispatchItemRequestDto request);
 
-    @PostMapping("/{id}/{user}/blockItemForUser")
+    @PostMapping("/item/{id}/{user}/block")
     @ServiceOperation("blockItemForUser")
     ResponseEntity<HttpStatus> blockItemForUser(@PathVariable("id") Long id, @PathVariable("user") Long userId,
                                                 @RequestBody DispatchItemRequestDto request);
 
-    @PostMapping("/{id}/restock")
+    @PostMapping("/item/{id}/restock")
     @ServiceOperation("restockItem")
     ResponseEntity<HttpStatus> restockItem(@PathVariable("id") Long id,
                                            @RequestBody RestockItemRequestDto request);
