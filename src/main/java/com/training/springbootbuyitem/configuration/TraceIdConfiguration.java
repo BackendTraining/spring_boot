@@ -1,4 +1,4 @@
-package com.training.springbootbuyitem;
+package com.training.springbootbuyitem.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.sleuth.zipkin2.ZipkinAutoConfiguration;
@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @ComponentScan({"com.training.springbootbuyitem"})
-public class AppConfig {
+public class TraceIdConfiguration {
 
     @Bean(ZipkinAutoConfiguration.REPORTER_BEAN_NAME)
     Reporter<Span> itemStorageReporter() {
