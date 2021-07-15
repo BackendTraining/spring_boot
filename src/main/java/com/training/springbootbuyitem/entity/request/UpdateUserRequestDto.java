@@ -11,5 +11,7 @@ public class UpdateUserRequestDto {
 
     private String firstName;
     private String lastName;
+    private String email;
+    private String password;
 
 }
