@@ -5,12 +5,9 @@ import com.training.springbootbuyitem.enums.EnumEntity;
 import com.training.springbootbuyitem.enums.EnumItemState;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
 import com.training.springbootbuyitem.repository.ItemRepository;
-import com.training.springbootbuyitem.utils.properties.ItemStorageProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestTemplate;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,20 +17,11 @@ import java.util.List;
 @Service
 public class ItemService implements IItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
 
-    @Autowired
-    private ItemStorageProperties itemStorageProperties;
-
-    /**
-     * @JavaDoc RestTemplate is a synchronous Http Client which is supported by Pivotal development team take into
-     * consideration this client is deprecated and shall not be supported for LTS use instead the newly Http Client
-     * WebClient which is capable of synchronous & asynchronous invocations check some code samples at:
-     * https://spring.io/guides/gs/consuming-rest/
-     */
-    @Autowired
-    private RestTemplate restTemplate;
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     @Override
     public List<Item> list() {
@@ -42,8 +30,8 @@ public class ItemService implements IItemService {
 
     @Override
     public Item get(Long id) {
-        return itemRepository.findById(id).orElseThrow(() ->
-            new EntityNotFoundException(EnumEntity.ITEM.name(), id));
+        return itemRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(EnumEntity.ITEM.name(), id));
     }
 
     // TODO - ex 10

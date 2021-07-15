@@ -1,11 +1,12 @@
 package com.training.springbootbuyitem.entity.request;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.PositiveOrZero;
-
-@Slf4j
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateUserRequestDto {
 
     private String firstName;

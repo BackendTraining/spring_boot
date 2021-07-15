@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-@Slf4j
 @Data
 @Builder
 @NoArgsConstructor
@@ -28,4 +26,5 @@ public class CreateItemRequestDto {
     @NotNull
     @PositiveOrZero
     private Double priceTag;
+
 }

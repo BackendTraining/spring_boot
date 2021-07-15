@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,11 +13,4 @@ public class CreateItemResponseDto {
 
     private Long itemUid;
 
-    public Long getItemUid() {
-        return itemUid;
-    }
-
-    public void setItemUid(Long itemUid) {
-        this.itemUid = itemUid;
-    }
 }

@@ -1,20 +1,25 @@
 package com.training.springbootbuyitem.service;
 
 import com.training.springbootbuyitem.entity.model.User;
+import com.training.springbootbuyitem.enums.EnumEntity;
+import com.training.springbootbuyitem.error.EntityNotFoundException;
 import com.training.springbootbuyitem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> list() {
@@ -23,12 +28,13 @@ public class UserService implements IUserService {
 
     @Override
     public User get(Long userUid) {
-        return userRepository.findById(userUid).orElseThrow(RuntimeException::new);
+        return userRepository.findById(userUid)
+            .orElseThrow(() -> new EntityNotFoundException(EnumEntity.USER.name(), userUid));
     }
 
     @Override
     public List<User> get(List<Long> id) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
