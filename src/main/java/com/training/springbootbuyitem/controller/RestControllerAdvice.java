@@ -1,7 +1,6 @@
 package com.training.springbootbuyitem.controller;
 
 import com.training.springbootbuyitem.entity.response.ErrorMessage;
-import com.training.springbootbuyitem.enums.EnumOperation;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;

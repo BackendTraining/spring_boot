@@ -1,5 +1,7 @@
 package com.training.springbootbuyitem.service;
 
+import com.training.springbootbuyitem.repository.UserRepository;
+import org.springframework.data.domain.Example;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,14 +14,21 @@ import java.util.ArrayList;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
+    public JwtUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("admin".equals(username)) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            String password = encoder.encode("12345");
-            return new User(username, password, new ArrayList<>());
-        } else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
+        Example<com.training.springbootbuyitem.entity.model.User> userExample = Example.of(com.training.springbootbuyitem.entity.model.User.builder().email(username).build());
+        com.training.springbootbuyitem.entity.model.User user = userRepository
+            .findOne(userExample)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with e-mail: " + username));
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String password = encoder.encode(user.getPassword());
+        return new User(user.getEmail(), password, new ArrayList<>());
     }
 }

@@ -23,7 +23,9 @@ public enum EnumOperation {
     GET_USERS("getUsers"),
     GET_USER("getUser"),
     CREATE_USER("createUser"),
-    UPDATE_USER("updateUser");
+    UPDATE_USER("updateUser"),
+    //Auth Operations
+    CREATE_AUTH_TOKEN("createAuthenticationToken");
 
     private final String name;
 
