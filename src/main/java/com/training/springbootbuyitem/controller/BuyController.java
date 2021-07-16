@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +28,7 @@ public class BuyController implements IBuyController {
 
     private final ItemService itemService;
     private final ModelMapper mapper;
+
 
     public BuyController(ItemService itemService, ModelMapper mapper) {
         this.itemService = itemService;
@@ -43,14 +43,14 @@ public class BuyController implements IBuyController {
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("/item/{id}")
     @ServiceOperation("getItem")
     public ResponseEntity<GetItemResponseDto> getItem(@PathVariable("id") Long id) {
         return new ResponseEntity<>(mapper.map(itemService.get(id), GetItemResponseDto.class), HttpStatus.OK);
     }
 
     @Override
-    @PatchMapping("/{id}")
+    @PatchMapping("/item/{id}")
     @ServiceOperation("updateItem")
     public ResponseEntity<UpdateItemResponseDto> updateItem(@PathVariable("id") Long id, @RequestBody Item item) {
         item.setItemUid(id);
@@ -58,7 +58,7 @@ public class BuyController implements IBuyController {
     }
 
     @Override
-    @PatchMapping("/updateItems")
+    @PatchMapping("/list/ids/update")
     @ServiceOperation("updateItems")
     public ResponseEntity<List<UpdateItemResponseDto>> updateItems(@RequestParam List<Long> idList, @RequestBody Item item) {
         return new ResponseEntity<>(itemService.updateList(idList, item).stream().map(i -> mapper.map(i, UpdateItemResponseDto.class)).collect(
@@ -66,7 +66,7 @@ public class BuyController implements IBuyController {
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/item/{id}")
     @ServiceOperation("deleteItem")
     public ResponseEntity<HttpStatus> deleteItem(@PathVariable("id") Long id) {
         itemService.delete(id);
@@ -74,7 +74,7 @@ public class BuyController implements IBuyController {
     }
 
     @Override
-    @GetMapping("/all")
+    @GetMapping
     @ServiceOperation("listItems")
     public ResponseEntity<List<GetItemResponseDto>> listItems() {
         return new ResponseEntity<>(itemService.list().stream().map(i -> mapper.map(i, GetItemResponseDto.class)).collect(
@@ -82,15 +82,24 @@ public class BuyController implements IBuyController {
     }
 
     @Override
-    @GetMapping("/getItems")
+    @GetMapping("/list/ids")
     @ServiceOperation("getItems")
     public ResponseEntity<List<GetItemResponseDto>> getItems(@RequestParam List<Long> idList) {
         return new ResponseEntity<>(itemService.get(idList).stream().map(i -> mapper.map(i, GetItemResponseDto.class)).collect(
             Collectors.toList()), HttpStatus.OK);
     }
+/*
+    @PostMapping("/list/id")
+    @ServiceOperation("getItems")
+    public ResponseEntity<List<GetItemResponseDto>> getItemsTest(@RequestBody GetIdListDto idListObject) {
+        List<Long> idList = idListObject.getIdList();
+        return new ResponseEntity<>(itemService.get(idList).stream().map(i -> mapper.map(i, GetItemResponseDto.class)).collect(
+            Collectors.toList()), HttpStatus.OK);
+    }
+*/
 
     @Override
-    @PostMapping("/{id}/dispatch")
+    @PostMapping("/item/{id}/dispatch")
     @ServiceOperation("dispatchItem")
     public ResponseEntity<HttpStatus> dispatchItem(@PathVariable("id") Long id,
                                                    @RequestBody DispatchItemRequestDto request) {
@@ -101,7 +110,7 @@ public class BuyController implements IBuyController {
 
     @Override
     @ServiceOperation("blockItem")
-    @PostMapping(value = "/{id}/block", produces = "application/json")
+    @PostMapping(value = "/item/{id}/block", produces = "application/json")
     public ResponseEntity<HttpStatus> blockItem(@PathVariable("id") Long id,
                                                 @RequestBody DispatchItemRequestDto request) {
         itemService.block(id, request.getQuantity());
@@ -111,7 +120,7 @@ public class BuyController implements IBuyController {
 
     @Override
     @ServiceOperation("blockItem")
-    @PostMapping(value = "/{id}/{user}/block", produces = "application/json")
+    @PostMapping(value = "/item/{id}/{user}/block", produces = "application/json")
     public ResponseEntity<HttpStatus> blockItemForUser(@PathVariable("id") Long id, @PathVariable("user") Long userId,
                                                        @RequestBody DispatchItemRequestDto request) {
         itemService.block(id, request.getQuantity());
@@ -120,7 +129,7 @@ public class BuyController implements IBuyController {
     }
 
     @Override
-    @PostMapping("/{id}/restock")
+    @PostMapping("/item/{id}/restock")
     @ServiceOperation("restockItem")
     public ResponseEntity<HttpStatus> restockItem(@PathVariable("id") Long id,
                                                   @RequestBody RestockItemRequestDto request) {

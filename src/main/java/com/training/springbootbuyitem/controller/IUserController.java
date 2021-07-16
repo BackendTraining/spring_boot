@@ -18,19 +18,19 @@ import java.util.List;
 
 public interface IUserController {
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     @ServiceOperation("getUser")
     ResponseEntity<GetUserResponseDto> getUser(@PathVariable("id") Long id);
 
-    @GetMapping("/all")
+    @GetMapping
     @ServiceOperation("getUser")
     ResponseEntity<List<GetUserResponseDto>> getUsers();
 
-    @PostMapping
+    @PostMapping("/user")
     @ServiceOperation("createUser")
     ResponseEntity<CreateUserResponseDto> createUser(@RequestBody @Valid CreateUserRequestDto request);
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/user/{id}")
     @ServiceOperation("updateUser")
     ResponseEntity<UpdateUserResponseDto> updateUser(@PathVariable("id") Long id, @RequestBody User user);
 }
