@@ -8,12 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "user", schema = "itemstorage")
 @Proxy(lazy = false)
@@ -33,6 +29,8 @@ public class User extends Auditable {
     private String lastName;
     private String email;
     private String password;
+    @OneToMany(targetEntity = Cart.class)
+    private List<Cart> cartHistory;
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
