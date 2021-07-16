@@ -8,16 +8,20 @@ import java.util.Arrays;
 public enum EnumOperation {
 
     //Item Operations
+    LIST_ITEMS("listItems"),
+    GET_ITEM("getItem"),
+    GET_ITEMS("getItems"),
     CREATE_ITEM("createItem"),
     UPDATE_ITEM("updateItem"),
-    GET_ITEM("getItem"),
-    LIST_ITEM("listItem"),
+    UPDATE_ITEMS("updateItems"),
     DELETE_ITEM("deleteItem"),
-    RESTOCK_ITEM("restockItem"),
     DISPATCH_ITEM("dispatchItem"),
+    BLOCK_ITEM("blockItem"),
+    BLOCK_ITEM_FOR_USER("blockItemForUser"),
+    RESTOCK_ITEM("restockItem"),
     //User Operations
-    GET_USER("getUser"),
     GET_USERS("getUsers"),
+    GET_USER("getUser"),
     CREATE_USER("createUser"),
     UPDATE_USER("updateUser");
 

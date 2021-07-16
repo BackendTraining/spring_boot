@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @RefreshScope
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController implements IUserController {
 
     private final UserService userService;
@@ -37,25 +37,36 @@ public class UserController implements IUserController {
     }
 
     @Override
-    @GetMapping("/{id}")
-    @ServiceOperation("getUser")
-    public ResponseEntity<GetUserResponseDto> getUser(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(mapper.map(userService.get(id), GetUserResponseDto.class), HttpStatus.OK);
+    @GetMapping
+    @ServiceOperation("getUsers")
+    public ResponseEntity<List<GetUserResponseDto>> getUsers() {
+        List<GetUserResponseDto> responseDTO = userService.list()
+            .stream()
+            .map(i -> mapper.map(i, GetUserResponseDto.class))
+            .collect(Collectors.toList());
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @Override
-    @GetMapping("/all")
-    @ServiceOperation("getUsers")
-    public ResponseEntity<List<GetUserResponseDto>> getUsers() {
-        return new ResponseEntity<>(userService.list().stream().map(i -> mapper.map(i, GetUserResponseDto.class)).collect(
-            Collectors.toList()), HttpStatus.OK);
+    @GetMapping("/{id}")
+    @ServiceOperation("getUser")
+    public ResponseEntity<GetUserResponseDto> getUser(@PathVariable("id") Long id) {
+        User savedUser = userService.get(id);
+        GetUserResponseDto responseDTO = mapper.map(savedUser, GetUserResponseDto.class);
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @Override
     @PostMapping
     @ServiceOperation("createUser")
     public ResponseEntity<CreateUserResponseDto> createUser(@RequestBody @Valid CreateUserRequestDto request) {
-        return new ResponseEntity<>(mapper.map(userService.save(mapper.map(request, User.class)), CreateUserResponseDto.class), HttpStatus.CREATED);
+        User userFromRequest = mapper.map(request, User.class);
+        User savedUser = userService.save(userFromRequest);
+        CreateUserResponseDto responseDTO = mapper.map(savedUser, CreateUserResponseDto.class);
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     @Override
@@ -63,7 +74,10 @@ public class UserController implements IUserController {
     @ServiceOperation("updateUser")
     public ResponseEntity<UpdateUserResponseDto> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         user.setUserUid(id);
-        return new ResponseEntity<>(mapper.map(userService.update(user), UpdateUserResponseDto.class), HttpStatus.OK);
+        User savedUser = userService.update(user);
+        UpdateUserResponseDto responseDTO = mapper.map(savedUser, UpdateUserResponseDto.class);
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
 }
