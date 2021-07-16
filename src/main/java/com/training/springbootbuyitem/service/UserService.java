@@ -55,6 +55,13 @@ public class UserService implements IUserService {
         if (StringUtils.hasText(user.getLastName())) {
             persistedUser.setLastName(user.getLastName());
         }
+        if (StringUtils.hasText(user.getEmail())) {
+            persistedUser.setEmail(user.getEmail());
+        }
+        if (StringUtils.hasText(user.getPassword())) {
+            persistedUser.setPassword(user.getPassword());
+        }
+
         return userRepository.save(persistedUser);
     }
 

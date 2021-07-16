@@ -20,8 +20,8 @@ public enum EnumOperation {
     BLOCK_ITEM_FOR_USER("blockItemForUser"),
     RESTOCK_ITEM("restockItem"),
     //User Operations
-    GET_USER("getUser"),
     GET_USERS("getUsers"),
+    GET_USER("getUser"),
     CREATE_USER("createUser"),
     UPDATE_USER("updateUser");
 

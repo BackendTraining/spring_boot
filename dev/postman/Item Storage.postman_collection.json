@@ -1,10 +1,635 @@
 {
 	"info": {
-		"_postman_id": "17113c00-8aec-48ae-8d65-d8bc00335fed",
+		"_postman_id": "6408e5cc-ac6c-46d7-9af6-fd498759b3cd",
 		"name": "Item Storage",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "One Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/400",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"400"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Multi Items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/ids/?idList=1,2,3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"ids",
+								""
+							],
+							"query": [
+								{
+									"key": "idList",
+									"value": "1,2,3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Yoga Ball\",\r\n    \"description\": \"Blue Ball\",\r\n    \"market\": \"PT\",\r\n    \"stock\": 15,\r\n    \"priceTag\": 8.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"market\": \"PT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Multi Items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"priceTag\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items?idList=1,2,3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items"
+							],
+							"query": [
+								{
+									"key": "idList",
+									"value": "1,2,3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dispatch Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/2/dispatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"2",
+								"dispatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/2/block",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"2",
+								"block"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block Item For User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/2/block/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"2",
+								"block",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restock Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/items/2/restock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"items",
+								"2",
+								"restock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "One User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/users/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"users",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Jane\",\r\n  \"lastName\": \"Doe\",\r\n  \"email\": \"jane.doe@gmail.com\",\r\n  \"password\": \"jane_2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lastName\": \"Smith\",\r\n  \"email\": \"jane.smith@outlook.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/item-storage-service/users/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"item-storage-service",
+								"users",
+								"32"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Auth",
 			"request": {
@@ -29,67 +654,6 @@
 					"path": [
 						"item-storage-service",
 						"authenticate"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"email\": \"john.doe@gmail.com\",\r\n  \"password\": \"jhdjs_2021\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8888/item-storage-service/user/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8888",
-					"path": [
-						"item-storage-service",
-						"user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "One User",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjM3ODk5MSwiaWF0IjoxNjI2MzYwOTkxfQ.vpTgMjhpTQqGFv0T_J9TUE1SAXToUtactcLB8VAzk_6as3lEgcROSLib8QkWrHSeWWK_naMzAhXpTHwSMVLPgQ",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8888/item-storage-service/user/31",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8888",
-					"path": [
-						"item-storage-service",
-						"user",
-						"31"
 					]
 				}
 			},
