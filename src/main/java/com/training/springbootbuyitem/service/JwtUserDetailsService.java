@@ -17,7 +17,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         if ("admin".equals(username)) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String password = encoder.encode("12345");
-            return new User("admin", password, new ArrayList<>());
+            return new User(username, password, new ArrayList<>());
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
