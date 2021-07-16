@@ -16,7 +16,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -47,7 +47,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -77,7 +77,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -121,7 +121,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -167,7 +167,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -213,7 +213,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -264,7 +264,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -301,7 +301,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -348,7 +348,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -395,7 +395,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -443,7 +443,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NDY5OSwiaWF0IjoxNjI2NDI2Njk5fQ.UiaY6COM6x9C5xg-9spRwFmMpdr_q-fMbnKyI7QTSIUt5wi8-mWyK6FOwyOM3cH9yrLhWFVUeXsN-Lu5hmMf7A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -495,7 +495,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -526,7 +526,12 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -556,7 +561,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -596,7 +601,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNjQ0NzUxMCwiaWF0IjoxNjI2NDI5NTEwfQ.9l7uCkNA7H2rD8R5OYNdOZ-LeuG3HSu6o213k8qtTAGgtpgU3SWeB4nnIVC-O68VoWd1D-Y4jq6EbcCdfqrMng",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -637,7 +642,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"12345\"\r\n}",
+					"raw": "{\r\n  \"username\": \"RosieDodd@teleworm.us\",\r\n  \"password\": \"xe0uaGhua\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -658,6 +663,32 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJSb3NpZURvZGRAdGVsZXdvcm0udXMiLCJleHAiOjE2MjY0NjY2OTYsImlhdCI6MTYyNjQ0ODY5Nn0.yANlZElHMdM8ehQVO3VXe_WH-YNkRMAT87PySzYVAio6UBCafj9pndKAAjQKQorxw9k63ASH-8nmR6IjuN2mRA"
 		}
 	]
 }
