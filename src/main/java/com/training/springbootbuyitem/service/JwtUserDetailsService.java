@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +26,6 @@ public class JwtUserDetailsService implements UserDetailsService {
             .findOne(userExample)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with e-mail: " + username));
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = encoder.encode(user.getPassword());
-        return new User(user.getEmail(), password, new ArrayList<>());
+        return new User(user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 }
