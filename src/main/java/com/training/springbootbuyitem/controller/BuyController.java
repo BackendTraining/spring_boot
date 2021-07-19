@@ -117,6 +117,14 @@ public class BuyController implements IBuyController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
+    @DeleteMapping("/ids")
+    @ServiceOperation("deleteItems")
+    public ResponseEntity<HttpStatus> deleteItems(@RequestParam List<Long> idList) {
+        idList.forEach(i -> itemService.delete(i));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @Override
     @PostMapping("/{id}/dispatch")
     @ServiceOperation("dispatchItem")
@@ -125,6 +133,15 @@ public class BuyController implements IBuyController {
         itemService.dispatch(id, request.getQuantity());
         return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+
+    @PostMapping("/ids/dispatch")
+    @ServiceOperation("dispatchItems")
+    public ResponseEntity<HttpStatus> dispatchItems(@RequestParam List<Long> idList,
+                                                                  @RequestBody DispatchItemRequestDto request) {
+        idList.forEach(i -> itemService.dispatch(i, request.getQuantity()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
@@ -137,6 +154,15 @@ public class BuyController implements IBuyController {
 
     }
 
+    @PostMapping(value = "/ids/block", produces = "application/json")
+    @ServiceOperation("blockItems")
+    public ResponseEntity<HttpStatus> blockItems(@RequestParam List<Long> idList,
+                                                    @RequestBody DispatchItemRequestDto request) {
+        idList.forEach(i -> itemService.block(i, request.getQuantity()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @Override
     @PostMapping(value = "/{id}/block/{user}", produces = "application/json")
     @ServiceOperation("blockItemForUser")
@@ -147,12 +173,31 @@ public class BuyController implements IBuyController {
 
     }
 
+    @PostMapping(value = "/ids/block/{user}", produces = "application/json")
+    @ServiceOperation("blockItemsForUser")
+    public ResponseEntity<HttpStatus> blockItemsForUser(@RequestParam List<Long> idList,
+                                                 @RequestBody DispatchItemRequestDto request) {
+        idList.forEach(i -> itemService.block(i, request.getQuantity()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     @Override
     @PostMapping("/{id}/restock")
     @ServiceOperation("restockItem")
     public ResponseEntity<HttpStatus> restockItem(@PathVariable("id") Long id,
                                                   @RequestBody RestockItemRequestDto request) {
         itemService.restock(id, request.getQuantity());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/ids/restock")
+    @ServiceOperation("restockItems")
+    public ResponseEntity<HttpStatus> restockItems(@RequestParam List<Long> idList,
+                                                        @RequestBody RestockItemRequestDto request) {
+        idList.forEach(i -> itemService.restock(i, request.getQuantity()));
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
