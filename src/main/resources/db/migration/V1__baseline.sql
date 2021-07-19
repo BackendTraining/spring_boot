@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS itemStorage.user
     user_uid         serial,
     first_name       varchar(255),
     last_name        varchar(255),
-    email            varchar(100),
-    password         varchar(30),
+    email            varchar(60),
+    password         varchar(100),
 
     created_by       varchar(100),
     modified_at      TIMESTAMP WITH TIME ZONE,
