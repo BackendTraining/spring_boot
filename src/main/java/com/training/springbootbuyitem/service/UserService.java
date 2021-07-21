@@ -1,24 +1,30 @@
 package com.training.springbootbuyitem.service;
 
+import com.training.springbootbuyitem.entity.model.Role;
 import com.training.springbootbuyitem.entity.model.User;
 import com.training.springbootbuyitem.enums.EnumEntity;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
 import com.training.springbootbuyitem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
     @Override
@@ -39,6 +45,14 @@ public class UserService implements IUserService {
 
     @Override
     public User save(User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role role = roleService.findByName("USER");
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+        user.setRoles(roleSet);
+
         return userRepository.save(user);
     }
 
