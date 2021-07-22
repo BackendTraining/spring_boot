@@ -1,5 +1,6 @@
 package com.training.springbootbuyitem.controller;
 
+import com.hazelcast.core.HazelcastInstance;
 import com.training.springbootbuyitem.entity.model.Item;
 import com.training.springbootbuyitem.entity.request.CreateItemRequestDto;
 import com.training.springbootbuyitem.entity.request.DispatchItemRequestDto;
@@ -11,6 +12,7 @@ import com.training.springbootbuyitem.service.ItemService;
 import com.training.springbootbuyitem.utils.annotation.ServiceOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,9 @@ public class BuyController implements IBuyController {
 
     private final ItemService itemService;
     private final ModelMapper mapper;
+
+    @Autowired
+    private HazelcastInstance hazelcastInstance;
 
 
     public BuyController(ItemService itemService, ModelMapper mapper) {

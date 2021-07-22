@@ -1,27 +1,41 @@
 package com.training.springbootbuyitem.service;
 
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.map.IMap;
 import com.training.springbootbuyitem.entity.model.Item;
 import com.training.springbootbuyitem.enums.EnumEntity;
 import com.training.springbootbuyitem.enums.EnumItemState;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
 import com.training.springbootbuyitem.repository.ItemRepository;
+import com.training.springbootbuyitem.utils.MapNames;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
-public class ItemService implements IItemService {
+public class ItemService implements IItemService, MapNames {
 
     private final ItemRepository itemRepository;
+    private HazelcastInstance hazelcastInstance;
+    private IMap<Long, Item> itemsMap;
 
-    public ItemService(ItemRepository itemRepository) {
+    @Autowired
+    public ItemService(ItemRepository itemRepository, @Qualifier("ClientInstance") HazelcastInstance hazelcastInstance) {
         this.itemRepository = itemRepository;
+        this.hazelcastInstance = hazelcastInstance;
+    }
+
+    @PostConstruct
+    public void init(){
+        itemsMap = hazelcastInstance.getMap(ITEMS_MAP);
     }
 
     @Override
@@ -35,13 +49,25 @@ public class ItemService implements IItemService {
             .orElseThrow(() -> new EntityNotFoundException(EnumEntity.ITEM.name(), id));
     }
 
+    public void addItemHazelcast(Item item){
+        itemsMap.put(item.getItemUid(), item);
+    }
+    public void addItemsHazelcast(Collection<Item> items){
+        Map<Long, Item> itemsLocalMap = new HashMap<>();
+
+        for ( Item item : items){
+            itemsLocalMap.put(item.getItemUid(), item);
+        }
+
+        itemsMap.putAll(itemsLocalMap);
+    }
+
     // TODO - ex 10
     @Override
     public List<Item> get(List<Long> ids) {
         List<Item> itemList = new ArrayList<>();
         ids.forEach(id -> {
-            Item item = itemRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(EnumEntity.ITEM.name(), id));
+            Item item = itemRepository.findById(id).orElse(new Item());
 
             itemList.add(item);
         });
