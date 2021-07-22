@@ -1,6 +1,7 @@
 package com.training.springbootbuyitem.entity.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,6 +51,8 @@ public class User extends Auditable {
     @Column
     @JsonIgnore
     private String password;
+
+    @JsonManagedReference
     @OneToMany(targetEntity = Cart.class)
     private List<Cart> cartHistory;
 

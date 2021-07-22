@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS itemStorage.user
 ALTER TABLE itemStorage.user
     OWNER TO postgres;
 
-create TABLE IF NOT EXISTS itemStorage.cart
+CREATE TABLE IF NOT EXISTS itemStorage.cart
 (
     cart_uid         serial,
-    fk_user_uid      serial,
+    fk_user_uid      integer,
 
     created_by       varchar(100),
     modified_at      TIMESTAMP WITH TIME ZONE,
@@ -55,11 +55,14 @@ create TABLE IF NOT EXISTS itemStorage.cart
     CONSTRAINT fk_user FOREIGN KEY (fk_user_uid) REFERENCES itemStorage.user (user_uid)
 );
 
-create TABLE IF NOT EXISTS itemStorage.cart_item
+ALTER TABLE itemStorage.cart
+    OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS itemStorage.cart_item
 (
     cart_item_uid    serial,
-    fk_cart_uid      serial,
-    fk_item_uid      serial,
+    fk_cart_uid      integer,
+    fk_item_uid      integer,
     quantity         bigint,
 
     created_by       varchar(100),
@@ -72,9 +75,8 @@ create TABLE IF NOT EXISTS itemStorage.cart_item
     CONSTRAINT fk_item FOREIGN KEY (fk_item_uid) REFERENCES itemStorage.item (item_uid)
 );
 
-alter table itemStorage.user
+ALTER TABLE itemStorage.cart_item
     OWNER TO postgres;
-
 
 CREATE TABLE IF NOT EXISTS itemStorage.role
 (
