@@ -4,6 +4,7 @@ import com.training.springbootbuyitem.entity.model.Item;
 import com.training.springbootbuyitem.enums.EnumEntity;
 import com.training.springbootbuyitem.enums.EnumItemState;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
+import com.training.springbootbuyitem.error.GreedyBuyerException;
 import com.training.springbootbuyitem.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -90,10 +91,13 @@ public class ItemService implements IItemService {
 
     @Override
     public Item save(Item item) {
-        item.setState(EnumItemState.AVAILABLE.name());
+        item.setState(
+            item.getStock().signum() > 0
+                ? EnumItemState.AVAILABLE
+                : EnumItemState.RESTOCK
+        );
         return itemRepository.save(item);
     }
-
 
     @Override
     public void restock(Long id, Integer quantity) {
@@ -102,11 +106,17 @@ public class ItemService implements IItemService {
         save(item);
     }
 
-    //TODO create the dispatch method that use "quantity"  items from item stock for the item represented by id
+    //TODO create the dispatch method that use "quantity" items from item stock for the item represented by id
     @Override
     public void dispatch(Long id, Integer quantity) {
         Item item = get(id);
-        item.setStock(item.getStock().subtract(BigInteger.valueOf(quantity)));
+        BigInteger newStock = item.getStock().subtract(BigInteger.valueOf(quantity));
+
+        if (newStock.signum() < 0) {
+            throw new GreedyBuyerException(quantity, item.getName(), item.getStock().intValue());
+        }
+
+        item.setStock(newStock);
         save(item);
     }
 
