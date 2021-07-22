@@ -40,3 +40,28 @@ CREATE TABLE IF NOT EXISTS itemStorage.user
 
 ALTER TABLE itemStorage.user
     OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS itemStorage.role
+(
+    role_uid    serial,
+    name        varchar(50),
+    description varchar(255),
+
+    CONSTRAINT pk_role PRIMARY KEY (role_uid)
+);
+
+ALTER TABLE itemStorage.role
+    OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS itemStorage.user_roles
+(
+    role_uid integer,
+    user_uid integer,
+
+    CONSTRAINT pk_user_roles PRIMARY KEY (role_uid, user_uid),
+    CONSTRAINT fk_role FOREIGN KEY (role_uid) REFERENCES itemStorage.role (role_uid),
+    CONSTRAINT fk_user FOREIGN KEY (user_uid) REFERENCES itemStorage.user (user_uid)
+);
+
+ALTER TABLE itemStorage.user_roles
+    OWNER TO postgres;

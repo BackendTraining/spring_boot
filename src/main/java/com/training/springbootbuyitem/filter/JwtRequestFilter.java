@@ -1,9 +1,11 @@
 package com.training.springbootbuyitem.filter;
 
 import com.training.springbootbuyitem.service.JwtUserDetailsService;
-import com.training.springbootbuyitem.utils.JwtTokenUtil;
+import com.training.springbootbuyitem.utils.TokenProvider;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,48 +24,50 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final JwtUserDetailsService jwtUserDetailsService;
-    private final JwtTokenUtil jwtTokenUtil;
+    private final TokenProvider jwtTokenUtil;
+    @Value("${jwt.header.string}")
+    public String headerString;
+    @Value("${jwt.token.prefix}")
+    public String tokenPrefix;
 
-    public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService, JwtTokenUtil jwtTokenUtil) {
+    public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService, TokenProvider tokenProvider) {
         this.jwtUserDetailsService = jwtUserDetailsService;
-        this.jwtTokenUtil = jwtTokenUtil;
+        this.jwtTokenUtil = tokenProvider;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
         throws ServletException, IOException {
 
-        final String requestTokenHeader = request.getHeader("Authorization");
-
+        String header = request.getHeader(headerString);
         String username = null;
-        String jwtToken = null;
+        String authToken = null;
+
         // JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+        if (header != null && header.startsWith(tokenPrefix)) {
+            authToken = header.replace(tokenPrefix, "");
             try {
-                username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                username = jwtTokenUtil.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException e) {
-                log.error("Unable to get JWT Token");
+                log.error("An error occurred while fetching Username from Token", e);
             } catch (ExpiredJwtException e) {
-                log.error("JWT Token has expired");
+                log.error("The token has expired", e);
+            } catch (SignatureException e) {
+                log.error("Authentication Failed. Username or Password not valid.");
             }
         } else {
-            log.warn("JWT Token does not begin with Bearer String");
+            log.warn("Couldn't find bearer string, header will be ignored");
         }
 
-        // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
-            // if token is valid configure Spring Security to manually set authentication
-            if (Boolean.TRUE.equals(jwtTokenUtil.validateToken(jwtToken, userDetails))) {
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities());
-                authenticationToken
-                    .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            if (Boolean.TRUE.equals(jwtTokenUtil.validateToken(authToken, userDetails))) {
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                log.info("authenticated user " + username + ", setting security context");
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
         chain.doFilter(request, response);

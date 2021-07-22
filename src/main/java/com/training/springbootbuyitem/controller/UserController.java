@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class UserController implements IUserController {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     @ServiceOperation("getUsers")
     public ResponseEntity<List<GetUserResponseDto>> getUsers() {

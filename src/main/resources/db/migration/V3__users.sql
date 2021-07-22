@@ -1,6 +1,6 @@
 -- original password: deiRoof9ee
 insert into "item-storage-db".itemstorage.user(user_uid, first_name, last_name, email, password, created_by)
-values (1, 'Gabriel', 'Farmer', 'GabrielFarmer@gustr.com',
+values (1, 'Admin', 'Silva', 'admin@admin.com',
         '$2a$10$i8wzeivJbAijZxMbJDf7qeNy63VgR1eWJCLgJv3YZpt/sJkFmWo6e', 'admin');
 -- original password: xe0uaGhua
 insert into "item-storage-db".itemstorage.user(user_uid, first_name, last_name, email, password, created_by)
