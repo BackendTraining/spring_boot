@@ -642,7 +642,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"RosieDodd@teleworm.us\",\r\n  \"password\": \"xe0uaGhua\"\r\n}",
+					"raw": "{\r\n  \"username\": \"admin@admin.com\",\r\n  \"password\": \"deiRoof9ee\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -688,7 +688,7 @@
 	"variable": [
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJSb3NpZURvZGRAdGVsZXdvcm0udXMiLCJleHAiOjE2MjY0NjY2OTYsImlhdCI6MTYyNjQ0ODY5Nn0.yANlZElHMdM8ehQVO3VXe_WH-YNkRMAT87PySzYVAio6UBCafj9pndKAAjQKQorxw9k63ASH-8nmR6IjuN2mRA"
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6IlJPTEVfQURNSU4iLCJpYXQiOjE2MjY5NDk0MzQsImV4cCI6MTYyNjk2NzQzNH0.V6aIVImZir6NbMXV8zDl6SmFBnAMfFey6cySPufdjNP3E10Cx7KHjN5ws2N9Kx3OEQUD2wR3tIAM3WZB_fERyw"
 		}
 	]
 }
