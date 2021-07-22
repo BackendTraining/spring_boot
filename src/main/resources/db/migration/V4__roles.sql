@@ -1,8 +1,8 @@
 insert into "item-storage-db".itemstorage.role(role_uid, name, description)
-values (1, 'ADMIN', 'Admin role');
+values (1, 'USER', 'User role');
 
 insert into "item-storage-db".itemstorage.role(role_uid, name, description)
-values (2, 'USER', 'User role');
+values (2, 'ADMIN', 'Admin role');
 
 
 SELECT setval(

@@ -23,14 +23,12 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.header.string}")
-    public String headerString;
-
-    @Value("${jwt.token.prefix}")
-    public String tokenPrefix;
-
     private final JwtUserDetailsService jwtUserDetailsService;
     private final TokenProvider jwtTokenUtil;
+    @Value("${jwt.header.string}")
+    public String headerString;
+    @Value("${jwt.token.prefix}")
+    public String tokenPrefix;
 
     public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService, TokenProvider tokenProvider) {
         this.jwtUserDetailsService = jwtUserDetailsService;

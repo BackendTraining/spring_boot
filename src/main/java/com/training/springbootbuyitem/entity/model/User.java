@@ -50,9 +50,9 @@ public class User extends Auditable {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
-        joinColumns = {@JoinColumn(name = "userUid")},
-        inverseJoinColumns = {@JoinColumn(name = "roleUid")}
+    @JoinTable(name = "user_roles", schema = "itemstorage",
+        joinColumns = {@JoinColumn(name = "user_uid")},
+        inverseJoinColumns = {@JoinColumn(name = "role_uid")}
     )
     private Set<Role> roles;
 

@@ -23,7 +23,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Example<com.training.springbootbuyitem.entity.model.User> userExample = Example.of(com.training.springbootbuyitem.entity.model.User.builder().email(username).build());
+        Example<User> userExample = Example.of(User.builder().email(username).build());
         User user = userRepository
             .findOne(userExample)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with e-mail: " + username));
