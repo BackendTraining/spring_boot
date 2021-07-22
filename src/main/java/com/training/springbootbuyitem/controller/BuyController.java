@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +36,6 @@ public class BuyController implements IBuyController {
 
     private final ItemService itemService;
     private final ModelMapper mapper;
-
 
     public BuyController(ItemService itemService, ModelMapper mapper) {
         this.itemService = itemService;
@@ -79,7 +78,7 @@ public class BuyController implements IBuyController {
     @Override
     @PostMapping
     @ServiceOperation("createItem")
-    public ResponseEntity<CreateItemResponseDto> createItem(@RequestBody @Valid CreateItemRequestDto request) {
+    public ResponseEntity<CreateItemResponseDto> createItem(@RequestBody CreateItemRequestDto request) {
         Item itemFromRequest = mapper.map(request, Item.class);
         Item createdItem = itemService.save(itemFromRequest);
         CreateItemResponseDto responseDTO = mapper.map(createdItem, CreateItemResponseDto.class);
@@ -110,10 +109,19 @@ public class BuyController implements IBuyController {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     @ServiceOperation("deleteItem")
     public ResponseEntity<HttpStatus> deleteItem(@PathVariable("id") Long id) {
         itemService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/ids")
+    @ServiceOperation("deleteItems")
+    public ResponseEntity<HttpStatus> deleteItems(@RequestParam List<Long> idList) {
+        idList.forEach(itemService::delete);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -127,6 +135,15 @@ public class BuyController implements IBuyController {
 
     }
 
+    @PostMapping("/ids/dispatch")
+    @ServiceOperation("dispatchItems")
+    public ResponseEntity<HttpStatus> dispatchItems(@RequestParam List<Long> idList,
+                                                    @RequestBody DispatchItemRequestDto request) {
+        idList.forEach(i -> itemService.dispatch(i, request.getQuantity()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @Override
     @PostMapping(value = "/{id}/block", produces = "application/json")
     @ServiceOperation("blockItem")
@@ -135,6 +152,15 @@ public class BuyController implements IBuyController {
         itemService.block(id, request.getQuantity());
         return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+
+    @PostMapping(value = "/ids/block", produces = "application/json")
+    @ServiceOperation("blockItems")
+    public ResponseEntity<HttpStatus> blockItems(@RequestParam List<Long> idList,
+                                                 @RequestBody DispatchItemRequestDto request) {
+        idList.forEach(i -> itemService.block(i, request.getQuantity()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
@@ -147,12 +173,30 @@ public class BuyController implements IBuyController {
 
     }
 
+    @PostMapping(value = "/ids/block/{user}", produces = "application/json")
+    @ServiceOperation("blockItemsForUser")
+    public ResponseEntity<HttpStatus> blockItemsForUser(@RequestParam List<Long> idList,
+                                                        @RequestBody DispatchItemRequestDto request) {
+        idList.forEach(i -> itemService.block(i, request.getQuantity()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @Override
     @PostMapping("/{id}/restock")
     @ServiceOperation("restockItem")
     public ResponseEntity<HttpStatus> restockItem(@PathVariable("id") Long id,
                                                   @RequestBody RestockItemRequestDto request) {
         itemService.restock(id, request.getQuantity());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/ids/restock")
+    @ServiceOperation("restockItems")
+    public ResponseEntity<HttpStatus> restockItems(@RequestParam List<Long> idList,
+                                                   @RequestBody RestockItemRequestDto request) {
+        idList.forEach(i -> itemService.restock(i, request.getQuantity()));
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

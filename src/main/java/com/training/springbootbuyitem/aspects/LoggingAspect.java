@@ -22,15 +22,15 @@ public class LoggingAspect {
     private Long start;
 
     @Before("execution(* com.training.springbootbuyitem.controller.*.*(..)) && @annotation(com.training.springbootbuyitem.utils.annotation.ServiceOperation)")
-    public void beforeBuyController(JoinPoint joinPoint) {
+    public void beforeControllers(JoinPoint joinPoint) {
         start = System.currentTimeMillis();
         String methodName = joinPoint.getSignature().getName();
         EnumOperation enumOperation = EnumOperation.getByName(methodName);
         MDC.put(OPERATION_HEADER, enumOperation.toString());
     }
 
-    @After("execution(* com.training.springbootbuyitem.controller.BuyController.*(..)) && @annotation(com.training.springbootbuyitem.utils.annotation.ServiceOperation)")
-    public void afterBuyController() {
+    @After("execution(* com.training.springbootbuyitem.controller.*.*(..)) && @annotation(com.training.springbootbuyitem.utils.annotation.ServiceOperation)")
+    public void afterControllers() {
         Long end = System.currentTimeMillis();
         log.info(String.format(LOGGING_HANDLER_PROCESS_TIME_MSG, end - start));
     }

@@ -1,7 +1,7 @@
-create SCHEMA IF NOT EXISTS itemStorage;
-alter SCHEMA itemStorage OWNER TO postgres;
+CREATE SCHEMA IF NOT EXISTS itemStorage;
+ALTER SCHEMA itemStorage OWNER TO postgres;
 
-create TABLE IF NOT EXISTS itemStorage.item
+CREATE TABLE IF NOT EXISTS itemStorage.item
 (
     item_uid         serial,
     name             varchar(255) UNIQUE,
@@ -19,16 +19,16 @@ create TABLE IF NOT EXISTS itemStorage.item
     CONSTRAINT pk_item PRIMARY KEY (item_uid)
 );
 
-alter table itemStorage.item
+ALTER TABLE itemStorage.item
     OWNER TO postgres;
 
-create TABLE IF NOT EXISTS itemStorage.user
+CREATE TABLE IF NOT EXISTS itemStorage.user
 (
     user_uid         serial,
     first_name       varchar(255),
     last_name        varchar(255),
-    email            varchar(100),
-    password         varchar(30),
+    email            varchar(60),
+    password         varchar(100),
 
     created_by       varchar(100),
     modified_at      TIMESTAMP WITH TIME ZONE,
@@ -37,6 +37,9 @@ create TABLE IF NOT EXISTS itemStorage.user
 
     CONSTRAINT pk_user PRIMARY KEY (user_uid)
 );
+
+ALTER TABLE itemStorage.user
+    OWNER TO postgres;
 
 create TABLE IF NOT EXISTS itemStorage.cart
 (
@@ -48,13 +51,13 @@ create TABLE IF NOT EXISTS itemStorage.cart
     created_at       TIMESTAMP WITH TIME ZONE default CURRENT_DATE NOT NULL,
     last_modified_by varchar(100),
 
-    CONSTRAINT pk_cart PRIMARY KEY (cart_uid)
-    CONSTRAINT fk_user FOREIGN KEY (fk_user_id) REFERENCER user(user_uid)
+    CONSTRAINT pk_cart PRIMARY KEY (cart_uid),
+    CONSTRAINT fk_user FOREIGN KEY (fk_user_uid) REFERENCES itemStorage.user (user_uid)
 );
 
 create TABLE IF NOT EXISTS itemStorage.cart_item
 (
-    cart_item_uid    serial
+    cart_item_uid    serial,
     fk_cart_uid      serial,
     fk_item_uid      serial,
     quantity         bigint,
@@ -64,10 +67,36 @@ create TABLE IF NOT EXISTS itemStorage.cart_item
     created_at       TIMESTAMP WITH TIME ZONE default CURRENT_DATE NOT NULL,
     last_modified_by varchar(100),
 
-    CONSTRAINT pk_cart_item PRIMARY KEY (cart_item_uid)
-    CONSTRAINT fk_cart FOREIGN KEY (fk_cart_uid) REFERENCER cart(cart_uid)
-    CONSTRAINT fk_item FOREIGN KEY (fk_item_uid) REFERENCER item(item_uid)
+    CONSTRAINT pk_cart_item PRIMARY KEY (cart_item_uid),
+    CONSTRAINT fk_cart FOREIGN KEY (fk_cart_uid) REFERENCES itemStorage.cart (cart_uid),
+    CONSTRAINT fk_item FOREIGN KEY (fk_item_uid) REFERENCES itemStorage.item (item_uid)
 );
 
 alter table itemStorage.user
+    OWNER TO postgres;
+
+
+CREATE TABLE IF NOT EXISTS itemStorage.role
+(
+    role_uid    serial,
+    name        varchar(50),
+    description varchar(255),
+
+    CONSTRAINT pk_role PRIMARY KEY (role_uid)
+);
+
+ALTER TABLE itemStorage.role
+    OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS itemStorage.user_roles
+(
+    role_uid integer,
+    user_uid integer,
+
+    CONSTRAINT pk_user_roles PRIMARY KEY (role_uid, user_uid),
+    CONSTRAINT fk_role FOREIGN KEY (role_uid) REFERENCES itemStorage.role (role_uid),
+    CONSTRAINT fk_user FOREIGN KEY (user_uid) REFERENCES itemStorage.user (user_uid)
+);
+
+ALTER TABLE itemStorage.user_roles
     OWNER TO postgres;

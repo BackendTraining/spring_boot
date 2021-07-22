@@ -1,8 +1,5 @@
 package com.training.springbootbuyitem.constant;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class BuyItemConstant {
 
     /**
@@ -22,6 +19,8 @@ public class BuyItemConstant {
     public static final String LOGGING_HANDLER_INBOUND_MSG = "Received HTTP [%s] Request to [%s] at [%s]";
     public static final String LOGGING_HANDLER_OUTBOUND_MSG = "Responded with Status [%s] at [%s]";
     public static final String LOGGING_HANDLER_PROCESS_TIME_MSG = "Total processing time [%s] ms";
+    public static final String INVALID_CREDENTIALS_MSG = "INVALID_CREDENTIALS :: Incorrect username or password";
+
 
     private BuyItemConstant() {
     }

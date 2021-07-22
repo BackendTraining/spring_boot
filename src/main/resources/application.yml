@@ -40,4 +40,13 @@ eureka:
     fetch-registry: false
 
 jwt:
-  secret: itemStoragePass
+  authorities:
+    key: roles
+  header:
+    string: Authorization
+  signing:
+    key: itemStoragePass
+  token:
+    prefix: Bearer
+    validity: 18000
+
