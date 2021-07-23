@@ -4,6 +4,7 @@ import com.training.springbootbuyitem.entity.model.Role;
 import com.training.springbootbuyitem.entity.model.User;
 import com.training.springbootbuyitem.enums.EnumEntity;
 import com.training.springbootbuyitem.error.EntityNotFoundException;
+import com.training.springbootbuyitem.repository.RoleRepository;
 import com.training.springbootbuyitem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,11 +21,11 @@ import java.util.Set;
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
-    private final RoleService roleService;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, RoleService roleService) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.roleService = roleService;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class UserService implements IUserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role role = roleService.findByName("USER");
+        Role role = roleRepository.findByName("USER");
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
         user.setRoles(roleSet);

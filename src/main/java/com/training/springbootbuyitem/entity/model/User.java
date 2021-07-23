@@ -21,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
@@ -62,6 +63,10 @@ public class User extends Auditable {
         inverseJoinColumns = {@JoinColumn(name = "role_uid")}
     )
     private Set<Role> roles;
+
+    public User(Long userUid) {
+        this.userUid = userUid;
+    }
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;

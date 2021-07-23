@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS itemStorage.user
     user_uid         serial,
     first_name       varchar(255),
     last_name        varchar(255),
-    email            varchar(60),
+    email            varchar(60) UNIQUE,
     password         varchar(100),
 
     created_by       varchar(100),
@@ -101,4 +101,15 @@ CREATE TABLE IF NOT EXISTS itemStorage.user_roles
 );
 
 ALTER TABLE itemStorage.user_roles
+    OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS itemStorage.session
+(
+    session_uid serial,
+    token       varchar(256),
+
+    CONSTRAINT pk_session PRIMARY KEY (session_uid)
+);
+
+ALTER TABLE itemStorage.session
     OWNER TO postgres;
