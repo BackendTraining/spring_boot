@@ -36,18 +36,9 @@ public class ItemService implements IItemService {
             .orElseThrow(() -> new EntityNotFoundException(EnumEntity.ITEM.name(), id));
     }
 
-    // TODO - ex 10
     @Override
     public List<Item> get(List<Long> ids) {
-        List<Item> itemList = new ArrayList<>();
-        ids.forEach(id -> {
-            Item item = itemRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(EnumEntity.ITEM.name(), id));
-
-            itemList.add(item);
-        });
-
-        return itemList;
+        return itemRepository.findByIds(ids);
     }
 
     @Override

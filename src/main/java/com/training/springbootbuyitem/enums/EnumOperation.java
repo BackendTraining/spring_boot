@@ -30,7 +30,13 @@ public enum EnumOperation {
     CREATE_USER("createUser"),
     UPDATE_USER("updateUser"),
     //Auth Operations
-    CREATE_AUTH_TOKEN("createAuthenticationToken");
+    CREATE_AUTH_TOKEN("createAuthenticationToken"),
+    //Cart Operations
+    GET_CART("getCart"),
+    GET_USER_CART("getUserCart"),
+    CREATE_CART("createCart"),
+    UPDATE_CART("updateCart"),
+    DELETE_CART("deleteCart");
 
     private final String name;
 

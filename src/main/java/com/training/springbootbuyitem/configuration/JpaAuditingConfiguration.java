@@ -1,5 +1,6 @@
 package com.training.springbootbuyitem.configuration;
 
+import com.training.springbootbuyitem.component.CurrentUserHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,9 +14,15 @@ import java.util.Optional;
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class JpaAuditingConfiguration {
 
+    private final CurrentUserHelper currentUserHelper;
+
+    public JpaAuditingConfiguration(CurrentUserHelper currentUserHelper) {
+        this.currentUserHelper = currentUserHelper;
+    }
+
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return () -> Optional.ofNullable("buy-item");
+        return () -> Optional.ofNullable(currentUserHelper.getEmail());
     }
 
 }

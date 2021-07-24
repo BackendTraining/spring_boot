@@ -17,17 +17,14 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "role", schema = "itemstorage")
-public class Role {
+@Table(name = "session", schema = "itemstorage")
+public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleUid;
+    private Long sessionUid;
 
     @Column
-    private String name;
-
-    @Column
-    private String description;
+    private String token;
 
 }

@@ -63,6 +63,10 @@ public class User extends Auditable {
     )
     private Set<Role> roles;
 
+    public User(Long userUid) {
+        this.userUid = userUid;
+    }
+
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
